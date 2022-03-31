@@ -1,0 +1,29 @@
+<%- include("./layouts/header"); -%>
+    <div class="card">
+        <div class="text-center">
+            <h4>This survey will help us to improve our system.</h4>
+            <hr />
+            <form method="post" action="/partner/changepartner">
+                <div class="form-group mb-3 ">
+                    <label for="reason" class="form-label fw-bold d-inline">Why you wants to change your
+                        partner:</label>
+                    <select id="reason" class="form-select d-inline w-25" aria-label="Default select example"
+                        name="reason" placeholder="bbbb" required>
+                        <option value="Didn't get reply" selected>Opponent didn't replied.</option>
+                        <hr />
+                        <option value="Don't like him/her">Don't like him/her...</option>
+                        <hr />
+                        <option value="Not getting proper response">Not getting proper response.</option>
+                        <hr />
+                        <option value="Response with delay">Response with delay</option>
+                        <hr />
+                        <option value="other reason">other reason</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success mb-3">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <%- include("./layouts/footer"); -%>

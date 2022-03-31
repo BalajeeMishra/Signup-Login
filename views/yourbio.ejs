@@ -1,0 +1,49 @@
+<%- include("./layouts/header"); -%>
+    < <% if(typeof yourDetail !="undefined" ) {%>
+        <div class="profile">
+            <div class="text-center">
+                <a href="/partner/your_detail_edit/<%=yourDetail._id%>">Edit your detail</a>
+            </div>
+            <div class="text-center">
+                <a href="/partner/your_detail_delete/<%=yourDetail._id%>">Delete Your Detail</a>
+            </div>
+            <div class="textt">
+                <h5>Name: <%=UserDetails.name %>
+                </h5>
+                <h5>Email: <%=UserDetails.email %>
+                </h5>
+                <h5>Gender: <%=UserDetails.gender %>
+                </h5>
+                <% if(UserDetails.occupied) {%>
+                    <h5>Occupied: Yes
+                    </h5>
+                    <% } else{ %>
+                        <h5>Occupied: No</h5>
+                        <% } %>
+                            <h5>Height:<%= yourDetail.height %>
+                            </h5>
+                            <h5>Hobbies :<%= yourDetail.height %>
+                            </h5>
+                            <h5>Address:<%= yourDetail.address %>
+                            </h5>
+                            <h5>About: <%= yourDetail.about %>
+                            </h5>
+                            <h5>Instagram:<%= yourDetail.instagram %>
+                            </h5>
+                            <h5>Telegram Username:<%=UserDetails.telegram %>
+                            </h5>
+            </div>
+
+            <div>
+                <img src="../<%=yourDetail.image %> " width="200" height="200" class="img">
+            </div>
+
+        </div>
+        <% } else{%>
+            <div class="text-center">
+                <h1 style="color:white">First enter your detail</h1>
+                <a href="/partner/your_detail">Fillup Detail</a>
+            </div>
+            <% } %>
+
+                <%- include("./layouts/footer"); -%>

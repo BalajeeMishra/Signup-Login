@@ -1,0 +1,25 @@
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Single Walon</a>
+        <a href="/partner/your_detail" class="nav-link">Add your detail</a>
+        <a href="/partner/your_bio" class="nav-link" style="margin-right: 15px">profile</a>
+        <a href="/partner/single" class="nav-link" style="margin-right: 15px">Material for single </a>
+        <div class="navbar-nav" style="display: flex; flex-direction: row">
+            <div>
+                <a href="/partner/getpartner" class="nav-link" style="margin-right: 15px">Getpartner</a>
+
+            </div>
+            <% if(!currentUser) {%>
+                <div>
+                    <a href="/register" class="nav-link" style="margin-right: 15px">Register</a>
+                </div>
+                <div>
+                    <a href="/login" class="nav-link">Login</a>
+                </div>
+                <% }else{%>
+
+                    <a href="/logout" class="nav-link">Logout</a>
+                    <% } %>
+        </div>
+    </div>
+</nav>

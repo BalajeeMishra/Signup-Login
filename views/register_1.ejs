@@ -1,0 +1,31 @@
+<%- include("./layouts/header"); -%>
+    <div id="special_text">
+        <span class="typing"></span>
+    </div>
+    <div class="container  mt-4 card">
+        <form method="post" action="/register_1">
+            <div class=" form-group mb-3 ">
+                <label for="telegram" class="form-label">Telegram Username</label>
+                <input type="text" class="form-control" id="telegram" name="telegram" placeholder="@xyz123">
+            </div>
+            <div class="form-group mb-3">
+                <label for="instagram" class="form-label">Insta Id</label>
+                <input type="url" class="form-control" name="instagram" id="instagram"
+                    placeholder="https://www.instagram.com/Username">
+            </div>
+            <button type="submit" class="btn btn-success mb-3">SUBMIT</button>
+        </form>
+    </div>
+    <script>
+        var typed = new Typed(".typing", {
+            strings: ["Congratulation,you are signed in now.",
+                "Now give your social media detail below,we will share it with your match.",
+                "you can skip this step,if you don't want to share in that case we will share your email only with your match",
+            ],
+            typeSpeed: 30,
+            backSpeed: 50,
+            loop: true
+        });
+
+    </script>
+    <%- include("./layouts/footer"); -%>

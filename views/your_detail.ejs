@@ -1,0 +1,93 @@
+<%- include("./layouts/header"); -%>
+    <div class="card">
+        <% if(isDetail){ %>
+            <div class="text-center">
+                <h5>You have already added your detail but you can edit.</h5>
+                <!-- <div class="text-center">
+                    <a href="/partner/your_detail_edit/<//%=yourDetail._id%>">Edit your detail</a>
+                </div> -->
+            </div>
+            <% } else{%>
+                <div class="text-center">
+                    <h5>Add your detail for standout from market</h5>
+                </div>
+                <form method="post" action="/partner/your_detail" class="needs-validation" enctype="multipart/form-data"
+                    nonvalidate>
+
+                    <div class="form-group mb-3 mx-3">
+                        <label for="hobbies" class="form-label">Hobbies</label>
+                        <input type="text" class="form-control" id="hobbies" name="hobbies" placeholder=Hobbies"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 mx-3">
+                        <label for="about" class="form-label">About</label>
+                        <textarea name="about" class="form-control" cols="30" rows="10" placeholder="About"></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 mx-3">
+                        <label for="height" class="form-label">Height</label>
+                        <input type="number" class="form-control" id="height" name="height" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3 mx-3">
+                        <label for="birthday" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 mx-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" name="address" id="address" placeholder="address" class="form-control"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group mb-2 mx-3">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" name="image" id="img">
+                    </div>
+                    <div class="form-group mb-2 mx-3">
+                        <label for="instagram">Instagram</label>
+                        <input type="url" class="form-control" name="instagram" placeholder="http://example.com/"
+                            autocomplete="off" autofocus="">
+                    </div>
+                    <div class="button mb-2 mx-3">
+                        <button type="submit" class="btn btn-success">Add
+                            Detail</button>
+                    </div>
+                </form>
+    </div>
+    <% } %>
+        <script>
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        </script>
+
+        <%- include("./layouts/footer"); -%>

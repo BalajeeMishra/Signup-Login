@@ -1,0 +1,21 @@
+<%- include("./layouts/header"); -%>
+
+    <div class="card">
+        <div class="card-inside">
+            <h6>Mail of your partner is: <%=mail %>
+            </h6>
+            <a href="mailto:<%=mail%>?subject=From singlewala.com&body=I got your mail from signlewala.com,
+                Hope you are doing great.   ">
+                Send email
+            </a>
+            <% if(telegram){ %>
+                <h6>connect with telegram):</h6>
+                <h6>click here to send message:<a href=<%=telegram %>><%=telegram %></a>
+                </h6>
+                <% } %>
+        </div>
+    </div>
+    <%- include("./layouts/footer"); -%>
+
+
+        <!-- https://telegram.me/telegramUsername -->
