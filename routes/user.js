@@ -56,6 +56,7 @@ router.post(
         token: req.session.token,
         gender,
         telegram,
+        verify: true,
       });
 
       const registeredUser = await User.register(user, password).catch((e) => {
