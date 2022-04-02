@@ -66,9 +66,9 @@ body {
   .navbar-collapse{
     height: 230px!important;
   }
-  .nav-link{
+  /* .nav-link{
     margin-bottom: 6px;
-  }
+  } */
 }
 .allheader {
   width: 100vw;

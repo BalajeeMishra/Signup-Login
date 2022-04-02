@@ -66,6 +66,7 @@ router.post(
       id = registeredUser._id || null;
       if (typeof registeredUser != "undefined") {
         const result = await mailForVerify(email, req.session.token);
+        console.log(result);
         if (result) {
           // return res.render("mail_verification", { mail_verify: true });
           return res.json({ mail_sent: true });

@@ -21,7 +21,8 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
     const leng = getothers.length;
 
     if (leng == 0) {
-      throw "Give us some time we will give you,your opponent detail shortly through your mail.Please keep your eyes on email you got in this period";
+      throw "Sorry,Come here after some time,Right now we don't have partner for you";
+      // Give us some time we will give you,your opponent detail shortly through your mail.Please keep your eyes on email you got in this period
     }
     while (bool) {
       let selectedindexfromlist = Math.floor(Math.random() * leng + 1);
