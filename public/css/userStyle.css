@@ -51,10 +51,15 @@ body {
   overflow: hidden;
   margin-top: 10px;
   margin-bottom: 10px;
+  transition: 0.5s;
 }
+ /* a:hover{
+  transition: 5s;
+} */
 
 nav {
   background-color: rgba(226, 193, 4, 0.774) !important;
+  transition: 0.5s;
 }
 nav a {
   color: #480bf4 !important;
@@ -302,7 +307,8 @@ button {
   padding: 10px;
 }
 .sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
+  position:fixed;
+  z-index:100;
+  width:100%;
+  top:0;
 }
