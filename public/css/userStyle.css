@@ -105,7 +105,7 @@ button {
     display: flex;
     flex-direction: row;
     /* align-items: center; */
-    justify-content: space-evenly;
+    justify-content:space-between;
   }
   .img1 img {
     border-radius: 50%;
@@ -145,6 +145,7 @@ button {
 
   .card{
     width: 90%;
+    margin-top: 10px !important;
   }
   .typing{
     font-size: large !important;
