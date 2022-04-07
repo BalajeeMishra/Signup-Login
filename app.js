@@ -17,6 +17,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const Users = require("./routes/user");
 const Partner = require("./routes/partner");
+const FeedBack = require("./routes/feedback");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/signup-login";
 mongoose
   .connect(dbUrl, {
@@ -93,7 +94,7 @@ app.use((req, res, next) => {
 //routes part.
 app.use("/", Users);
 app.use("/partner", Partner);
-
+app.use("/feedback", FeedBack);
 const handleValidationErr = (err) => {
   return new AppError("please fill up all the required field carefully", 400);
 };

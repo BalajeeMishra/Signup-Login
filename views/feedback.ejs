@@ -1,0 +1,21 @@
+<%- include("./layouts/header"); -%>
+    <div class="card">
+        <div class="text-center">
+            <h5>we are working for you,In the mean time We love to hear feedback from you.</h5>
+        </div>
+        <form method="post" action="/feedback" class="needs-validation">
+            <div class="form-group mb-3 mx-3">
+                <label for="feedback" class="form-label">Feedback</label>
+                <textarea name="yourfeedback" id="feedback" class="form-control" cols="30" rows="10"
+                    placeholder="YourFeedBack">
+            </textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="button mb-2 mx-3">
+                <button type="submit" class="btn btn-success">submit</button>
+            </div>
+        </form>
+    </div>
+    <%- include("./layouts/footer"); -%>
