@@ -5,11 +5,12 @@ body {
   width: 100vw;
   min-height: 100vh;
   padding-bottom: 25px;
-  background-image: url("../image/couple.jpg");
+  /* background-image: url("../image/couple.jpg");
   background-attachment: fixed;
   background-size: cover;
   backdrop-filter: blur(2px);
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+
 }
 
 #myVideo {
@@ -131,6 +132,9 @@ button {
     
   }
 
+  .card{
+    width: 90%;
+  }
   .typing{
     font-size: large !important;
   }
