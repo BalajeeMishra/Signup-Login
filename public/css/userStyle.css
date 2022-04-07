@@ -9,6 +9,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   backdrop-filter: blur(2px);
+  background-repeat: no-repeat;
 }
 
 #myVideo {
@@ -115,7 +116,7 @@ button {
   flex-direction: column;
   }
   .navbar-collapse{
-    height: 230px!important;
+    height: 270px!important;
   }
   /* .nav-link{
     margin-bottom: 6px;

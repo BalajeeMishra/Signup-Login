@@ -45,5 +45,5 @@ router.get(
   detail.deletedDetail
 );
 router.get("/your_bio", isLoggedIn, isDetailAdded, detail.yourBio);
-router.get("/single", isLoggedIn, singleMaterial.materialForSingle);
+router.get("/single", singleMaterial.materialForSingle);
 module.exports = router;
