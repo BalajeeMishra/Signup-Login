@@ -58,16 +58,20 @@ nav a {
   color: #480bf4 !important;
   font-weight: bolder;
 }
+.typing{
+  height: 25vh;
+  position: fixed;
+}
 .card {
   width: 75%;
   color: rgb(28 5 128);
-  background: rgba(119, 164, 172, 0.7);
+  background: rgba(119, 164, 172, 0.9);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  margin: 20px auto;
+  margin: 80px auto !important;
   padding: 25px 15px;
 }
 
@@ -125,6 +129,10 @@ button {
     align-items: center
     
   }
+
+  .typing{
+    font-size: large !important;
+  }
 }
 .uls li {
   margin-top: 13px;
@@ -149,7 +157,7 @@ button {
   font-size: xx-large;
   font-weight: 900;
   color: red;
-  margin: 50px 50px;
+  margin: 10px 10px;
 }
 
 .select,

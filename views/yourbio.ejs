@@ -1,5 +1,5 @@
 <%- include("./layouts/header"); -%>
-    < <% if(typeof yourDetail !="undefined" ) {%>
+    < <% if(typeof yourDetail !="undefined" && UserDetails.profile) {%>
         <div class="profile">
             <div class="text-center">
                 <a href="/partner/your_detail_edit/<%=yourDetail._id%>">Edit your detail</a>
@@ -39,11 +39,50 @@
             </div>
 
         </div>
-        <% } else{%>
-            <div class="text-center">
-                <h1 style="color:white">First enter your detail</h1>
-                <a href="/partner/your_detail">Fillup Detail</a>
+        <div class="card">
+            <div class="card-inside">
+                <% if(yourDetail.opponentmail) {%>
+                    <h6>Mail of your partner is: <%=yourDetail.opponentmail %>
+                    </h6>
+                    <a href="mailto:<%=yourDetail.opponentmail%>?subject=From singlewala.com&body=I got your mail from signlewala.com,
+                    Hope you are doing great.   ">
+                        Send email
+                    </a>
+                    <% } %>
+                        <% if(yourDetail.opponenttelegram){ %>
+                            <h6>connect with telegram):</h6>
+                            <h6>click here to send message:<a href=<%=url %>><%=url %></a>
+                            </h6>
+                            <% } %>
             </div>
-            <% } %>
 
-                <%- include("./layouts/footer"); -%>
+        </div>
+        <% } else{%>
+
+            <div class="text-center">
+                <h3 style="color:white">You haven't entered your detail yet,Please add detail so that your partner can
+                    see your detail.This will increase your chances of success.</h3>
+                <a href="/partner/your_detail">Fillup Detail</a>
+                <% if(typeof yourDetail !="undefined" ) {%>
+                    <div class="card">
+                        <div class="card-inside">
+                            <% if(typeof yourDetail.opponentmail !="undefined" ) {%>
+                                <h6>Mail of your partner is: <%=yourDetail.opponentmail %>
+                                </h6>
+                                <a href="mailto:<%=yourDetail.opponentmail%>?subject=From singlewala.com&body=I got your mail from signlewala.com,
+                            Hope you are doing great.   ">
+                                    Send email
+                                </a>
+                                <% } %>
+                                    <% if(typeof yourDetail.opponenttelegram !="undefined" ){ %>
+                                        <h6>connect with telegram):</h6>
+                                        <h6>click here to send message:<a href=<%=url %>><%=url %></a>
+                                        </h6>
+                                        <% } %>
+                        </div>
+
+                    </div>
+                    <% } %>
+                        <% } %>
+
+                            <%- include("./layouts/footer"); -%>

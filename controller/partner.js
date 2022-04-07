@@ -6,6 +6,15 @@ module.exports.partnerPageWithSomeInstruction = async (req, res) => {
 };
 module.exports.contactofyourOpponent = async (req, res, next) => {
   try {
+    //importanttttt
+    if (req.user.disabled) {
+      throw "we already sent an opponent detail to you,please wait for reply.you can see this mail in your profile section";
+    }
+    if (!(await UserDetail.find({ userId: req.user._id }))[0]) {
+      const yourDetail = new UserDetail({ userId: req.user._id });
+      await yourDetail.save();
+    }
+
     let bool = true;
     let gender = req.user.gender;
     if (gender === "male") {
@@ -13,6 +22,7 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
     } else {
       gender = "male";
     }
+
     const getothers = await User.find({
       occupied: false,
       gender: gender,
@@ -33,11 +43,30 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
       // && !req.user
       if (!e.occupied) {
         const mail = e.email;
+
+        if (e.telegram) {
+          const telegram = e.telegram;
+          await UserDetail.findOneAndUpdate(
+            { userId: req.user._id },
+            { opponentmail: mail, opponenttelegram: telegram },
+            { new: true }
+          );
+        }
         // o us user ke liye hoga nnn ---->mrityunjay
         req.session.opponentmail = mail;
         await User.findOneAndUpdate(
           { email: mail },
           { occupied: true },
+          { new: true }
+        );
+        await UserDetail.findOneAndUpdate(
+          { userId: req.user._id },
+          { opponentmail: mail },
+          { new: true }
+        );
+        await User.findOneAndUpdate(
+          { _id: req.user._id },
+          { disabled: true },
           { new: true }
         );
         bool = false;

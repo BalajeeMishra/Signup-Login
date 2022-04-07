@@ -4,21 +4,42 @@ module.exports.addyourDetailPage = async (req, res) => {
   res.render("your_detail", { isDetail: req.session.profile });
 };
 module.exports.postYourDetail = async (req, res) => {
-  const newUserDetail = new UserDetail(req.body);
-  newUserDetail.image = req.file.filename;
-  newUserDetail.userId = req.user._id;
-  await newUserDetail.save();
+  if (!(await UserDetail.find({ userId: req.user._id }))[0]) {
+    const newUserDetail = new UserDetail(req.body);
+    await newUserDetail.save();
+    newUserDetail.image = req.file.filename;
+    newUserDetail.userId = req.user._id;
+    const UserDetails = await User.findById(req.user._id);
+    if (UserDetails.telegram) {
+      newUserDetail.telegram = UserDetails.telegram;
+    }
+  } else {
+    const newUserDetail = await UserDetail.findOneAndUpdate(
+      { userId: req.user._id },
+      req.body,
+      { new: true }
+    );
+    const UserDetails = await User.findById(req.user._id);
+    if (UserDetails.telegram) {
+      newUserDetail.telegram = UserDetails.telegram;
+    }
+    newUserDetail.image = req.file.filename;
+  }
   await User.findOneAndUpdate(
     { _id: req.user._id },
     { profile: true },
     { new: true }
   );
+
   res.redirect("/partner/your_bio");
 };
 module.exports.yourBio = async (req, res) => {
   const yourDetail = await UserDetail.find({ userId: req.user._id });
   const UserDetails = await User.findById(req.user._id);
-  res.render("yourbio", { yourDetail: yourDetail[0], UserDetails });
+  let telegram =
+    typeof yourDetail[0] != "undefined" ? yourDetail[0].opponenttelegram : "";
+  const url = "https://telegram.me/" + telegram;
+  res.render("yourbio", { yourDetail: yourDetail[0], UserDetails, url });
 };
 module.exports.editDetail = async (req, res) => {
   const { id } = req.params;

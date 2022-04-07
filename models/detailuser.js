@@ -28,8 +28,18 @@ const DetailUserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  //required timestamp thing,
+  opponentmail: {
+    type: String,
+  },
+  opponenttelegram: {
+    type: String,
+  },
   birthday: {
     type: Date,
+  },
+  telegram: {
+    type: String,
   },
 });
 

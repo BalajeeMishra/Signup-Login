@@ -7,7 +7,6 @@ const passport = require("passport");
 const { isVerified } = require("../helper/middleware");
 const jwt = require("jsonwebtoken");
 const { mailForVerify } = require("../helper/mailsendingfunction");
-var id;
 router.get("/", async (req, res) => {
   res.render("home", {
     user: req.user,
@@ -56,38 +55,46 @@ router.post(
         token: req.session.token,
         gender,
         telegram,
+        verify: true,
       });
 
       const registeredUser = await User.register(user, password).catch((e) => {
         // console.log(e.message);
         return res.json({ message: e.message });
       });
-      id = registeredUser._id || null;
-      if (typeof registeredUser != "undefined") {
-        const result = await mailForVerify(email, req.session.token);
-        console.log(result);
-        if (result) {
-          // return res.render("mail_verification", { mail_verify: true });
-          return res.json({ mail_sent: true });
-        }
-      } else {
-        return res.redirect("/register_1");
-      }
+      req.session.ids = registeredUser._id || null;
+      // if (typeof registeredUser != "undefined") {
+      //   const result = await mailForVerify(email, req.session.token);
+      //   if (result) {
+      //     // return res.render("mail_verification", { mail_verify: true });
+      //     return res.json({ mail_sent: true });
+      //   }
+      // } else {
+      //   return res.redirect("/register_1");
+      // }
 
-      // return res.redirect("/register_1");
+      return res.redirect("/register_1");
     } catch (e) {
       req.flash("error", e.message);
       res.redirect("/register_1");
     }
   })
 );
-router.get("/register_1", (req, res) => {
+router.get("/register_1", isVerified, (req, res) => {
   res.render("register_1");
 });
-router.post("/register_1", async (req, res) => {
+router.post("/register_1", isVerified, async (req, res) => {
   const register1Data = req.body;
-  await User.findOneAndUpdate({ _id: id }, register1Data, { new: true });
-  res.send("lets see");
+  //id ko session me rakho
+  // if (!req.session.ids) {
+  //   throw "you already added your detail,you can edit in detil section";
+  // }
+  await User.findOneAndUpdate({ _id: req.session.ids }, register1Data, {
+    new: true,
+  });
+  delete req.session.ids;
+  req.flash("success", "your detail is added successfully");
+  res.redirect("/");
 });
 router.get("/login", (req, res) => {
   res.render("login");

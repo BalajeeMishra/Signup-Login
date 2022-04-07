@@ -31,7 +31,9 @@ module.exports.isVerified = async (req, res, next) => {
 // };
 module.exports.isDetailAdded = async (req, res, next) => {
   var user = await User.findById(req.user._id);
-  req.session.profile = user.profile;
+  if (user) {
+    req.session.profile = user.profile;
+  }
   next();
 };
 
