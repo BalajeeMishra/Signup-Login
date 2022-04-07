@@ -5,13 +5,15 @@ module.exports.addyourDetailPage = async (req, res) => {
 };
 module.exports.postYourDetail = async (req, res) => {
   if (!(await UserDetail.find({ userId: req.user._id }))[0]) {
+    console.log("hello world");
     const newUserDetail = new UserDetail(req.body);
-    await newUserDetail.save();
     newUserDetail.image = req.file.filename;
     newUserDetail.userId = req.user._id;
+    await newUserDetail.save();
     const UserDetails = await User.findById(req.user._id);
     if (UserDetails.telegram) {
       newUserDetail.telegram = UserDetails.telegram;
+      await newUserDetail.save();
     }
   } else {
     const newUserDetail = await UserDetail.findOneAndUpdate(
@@ -22,8 +24,10 @@ module.exports.postYourDetail = async (req, res) => {
     const UserDetails = await User.findById(req.user._id);
     if (UserDetails.telegram) {
       newUserDetail.telegram = UserDetails.telegram;
+      await newUserDetail.save();
     }
     newUserDetail.image = req.file.filename;
+    await newUserDetail.save();
   }
   await User.findOneAndUpdate(
     { _id: req.user._id },
