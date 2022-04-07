@@ -63,17 +63,17 @@ router.post(
         return res.json({ message: e.message });
       });
       req.session.ids = registeredUser._id || null;
-      // if (typeof registeredUser != "undefined") {
-      //   const result = await mailForVerify(email, req.session.token);
-      //   if (result) {
-      //     // return res.render("mail_verification", { mail_verify: true });
-      //     return res.json({ mail_sent: true });
-      //   }
-      // } else {
-      //   return res.redirect("/register_1");
-      // }
+      if (typeof registeredUser != "undefined") {
+        const result = await mailForVerify(email, req.session.token);
+        if (result) {
+          // return res.render("mail_verification", { mail_verify: true });
+          return res.json({ mail_sent: true });
+        }
+      } else {
+        return res.redirect("/register_1");
+      }
 
-      return res.redirect("/register_1");
+      // return res.redirect("/register_1");
     } catch (e) {
       req.flash("error", e.message);
       res.redirect("/register_1");
