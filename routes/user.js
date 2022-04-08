@@ -7,11 +7,14 @@ const passport = require("passport");
 const { isVerified } = require("../helper/middleware");
 const jwt = require("jsonwebtoken");
 const { mailForVerify } = require("../helper/mailsendingfunction");
+
 router.get("/", async (req, res) => {
+  console.log(req.user);
   res.render("home", {
     user: req.user,
   });
 });
+
 var token;
 router.get(
   "/register",
@@ -55,6 +58,7 @@ router.post(
         token: req.session.token,
         gender,
         telegram,
+        verify: true,
       });
 
       const registeredUser = await User.register(user, password).catch((e) => {
@@ -79,9 +83,11 @@ router.post(
     }
   })
 );
+
 router.get("/register_1", isVerified, (req, res) => {
   res.render("register_1");
 });
+
 router.post("/register_1", isVerified, async (req, res) => {
   const register1Data = req.body;
   //id ko session me rakho
@@ -95,19 +101,21 @@ router.post("/register_1", isVerified, async (req, res) => {
   req.flash("success", "your detail is added successfully");
   res.redirect("/");
 });
-router.get("/login", (req, res) => {
-  res.render("login");
-});
-router.post(
-  "/login",
-  isVerified,
-  passport.authenticate("local", {
-    failureFlash: true,
-    failureRedirect: "/login",
-    successFlash: true,
-    successRedirect: "/",
+
+router
+  .route("/login")
+  .get((req, res) => {
+    res.render("login");
   })
-);
+  .post(
+    isVerified,
+    passport.authenticate("local", {
+      failureFlash: true,
+      failureRedirect: "/login",
+      successFlash: true,
+      successRedirect: "/",
+    })
+  );
 //token se ham find kar rahe hai .. yaha mail se bhi find kar sakte hai us case me agar token
 //ko session me store karte hai to kya ye 20 minute ke ander me delete hoga thats question bro...
 //okayyy.

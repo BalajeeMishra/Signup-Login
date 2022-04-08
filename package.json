@@ -2,7 +2,7 @@
   "name": "signup-login",
   "version": "1.0.2",
   "description": "Single walon ke liye best website hai...",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "balajee": "nodemon -r dotenv/config app.js"

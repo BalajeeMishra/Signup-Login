@@ -1,7 +1,8 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-process.env.PWD = process.cwd();
+//adding this thing
+// process.env.PWD = process.cwd();
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -20,6 +21,7 @@ const Users = require("./routes/user");
 const Partner = require("./routes/partner");
 const FeedBack = require("./routes/feedback");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/signup-login";
+
 mongoose
   .connect(dbUrl, {
     useUnifiedTopology: true,
@@ -32,14 +34,14 @@ mongoose
   .catch((err) => {
     console.error(err);
   });
+
 mongoose.set("useCreateIndex", true);
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-// app.use(express.static(__dirname + "/public"));
-app.use(express.static(process.env.PWD + "/public"));
+app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 // app.use(express.json());

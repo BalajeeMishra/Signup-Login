@@ -6,4 +6,3 @@ $(window).scroll(function () {
     $("#navbar").removeClass("sticky");
   }
 });
-console.log("hiii");

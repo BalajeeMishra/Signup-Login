@@ -10,7 +10,9 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 // req.session.token yaha problem create kar raha hai check karo iska documentation.
 module.exports.isVerified = async (req, res, next) => {
-  var user = await User.find({ token: req.session.token });
+  const { token } = req.session;
+  var user = await User.find({ token });
+  console.log(token, user);
   if (user[0].verify) {
     // req.flash("success", "welcome back!");
     delete req.session.returnTo;

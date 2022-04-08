@@ -1,15 +1,19 @@
 const UserDetail = require("../models/detailuser");
 const User = require("../models/user");
 const { mailForComplaint } = require("../helper/mailsendingfunction");
+
 module.exports.partnerPageWithSomeInstruction = async (req, res) => {
   res.render("partner");
 };
+
 module.exports.contactofyourOpponent = async (req, res, next) => {
   try {
     //importanttttt
+    console.log(req.user)
     if (req.user.disabled) {
       throw "we already sent an opponent detail to you,please wait for reply.you can see this mail in your profile section";
     }
+
     if (!(await UserDetail.find({ userId: req.user._id }))[0]) {
       const yourDetail = new UserDetail({ userId: req.user._id });
       await yourDetail.save();
@@ -28,12 +32,14 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
       gender: gender,
       verify: true,
     });
+
     const leng = getothers.length;
 
     if (leng == 0) {
       throw "Sorry,Come here after some time,Right now we don't have partner for you";
       // Give us some time we will give you,your opponent detail shortly through your mail.Please keep your eyes on email you got in this period
     }
+
     while (bool) {
       let selectedindexfromlist = Math.floor(Math.random() * leng + 1);
       if (selectedindexfromlist == leng) {
@@ -54,22 +60,27 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
         }
         // o us user ke liye hoga nnn ---->mrityunjay
         req.session.opponentmail = mail;
+
         await User.findOneAndUpdate(
           { email: mail },
           { occupied: true },
           { new: true }
         );
+
         await UserDetail.findOneAndUpdate(
           { userId: req.user._id },
           { opponentmail: mail },
           { new: true }
         );
+
         await User.findOneAndUpdate(
           { _id: req.user._id },
           { disabled: true },
           { new: true }
         );
+        req.user.disabled = true;
         bool = false;
+
         var url;
         if (e.telegram) {
           let telegram = e.telegram;
@@ -77,6 +88,7 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
           url = "https://telegram.me/" + telegram;
           console.log(telegram, url);
         }
+
         return res.render("mailsending", {
           mail: e.email,
           telegram: url,
@@ -87,9 +99,11 @@ module.exports.contactofyourOpponent = async (req, res, next) => {
     next(e);
   }
 };
+
 module.exports.changepartnerRequestPage = async (req, res) => {
   res.render("changepartner");
 };
+
 module.exports.addChangesReason = async (req, res) => {
   const reason = req.body.reason;
 
